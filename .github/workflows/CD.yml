@@ -12,8 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-      - uses: fregante/setup-git-user@v1
         with:
           node-version: 16
       - run: npm ci
+      - run: git config --global user.email "abhinandhajay@gmail.com"
+      - run: git config --global user.name "Abhinandh Ajay"
       - run: CI='' npm run deploy
