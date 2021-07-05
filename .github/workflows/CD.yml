@@ -14,7 +14,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
+      - uses: oleksiyrudenko/gha-git-credentials@v2.1
+        with:
+          global: true
+          name: 'Abhinandh Ajay'
+          email: 'abhinandhajay@gmail.com'
+          actor: 'abhinandhajay'
       - run: npm ci
-      - run: git config --global user.email "abhinandhajay@gmail.com"
-      - run: git config --global user.name "Abhinandh Ajay"
       - run: CI='' npm run deploy
