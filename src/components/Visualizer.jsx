@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import bubbleSort from '../algorithms/bubbleSort';
+import bubbleSort from '../algorithms/BubbleSort';
+import insertionSort from '../algorithms/InsertionSort';
 import selectionSort from '../algorithms/SelectionSort';
 import Bar from './Bar';
 import Button from './Button';
@@ -85,6 +86,33 @@ const Visualizer = () => {
 		}
 	}
 
+	const runInsertionSort = () => {
+		const ANIMATION_DELAY_MS = 1
+		const { animations } = insertionSort(array)
+
+		const allBars = document.querySelectorAll(`.main-bar`)
+
+		for (let i = 0; i < animations.length; i++) {
+
+			setTimeout(() => {
+				if (animations[i].comp !== undefined) {
+					allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
+					allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
+				}
+				if (animations[i].swap !== undefined) {
+					let temp = allBars[animations[i].swap[0]].style.height
+					allBars[animations[i].swap[0]].style.height = allBars[animations[i].swap[1]].style.height
+					allBars[animations[i].swap[1]].style.height = temp
+				}
+			}, ANIMATION_DELAY_MS * i)
+		}
+		for (let i = 0; i < arraySize; i++) {
+			setTimeout(() => {
+				allBars[i].style.backgroundColor = `var(--app-pink)`
+			}, ANIMATION_DELAY_MS * animations.length)
+		}
+	}
+
 
 	// const playAnimations = (animations) => {
 	// 	const allBars = document.querySelectorAll(`.main-bar`)
@@ -155,6 +183,9 @@ const Visualizer = () => {
 			</Button>
 			<Button onClick={runBubbleSort}>
 				Bubble Sort
+			</Button>
+			<Button onClick={runInsertionSort}>
+				Insertion Sort
 			</Button>
 			{/* <Button onClick={testAlgorithms}>
 				Test Algorithms
