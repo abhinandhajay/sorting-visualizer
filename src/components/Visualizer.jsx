@@ -32,7 +32,7 @@ const Visualizer = () => {
 	}
 
 	const runSelectionSort = () => {
-		const ANIMATION_DELAY_MS = 5
+		const ANIMATION_DELAY_MS = 10
 		const { animations } = selectionSort(array)
 
 		const allBars = document.querySelectorAll(`.main-bar`)
@@ -41,8 +41,8 @@ const Visualizer = () => {
 
 			setTimeout(() => {
 				if (animations[i].comp !== undefined) {
-					allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `var(--app-red)` : `var(--app-green)`
-					allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `var(--app-red)` : `var(--app-green)`
+					allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
+					allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
 				}
 				if (animations[i].swap !== undefined) {
 					let temp = allBars[animations[i].swap[0]].style.height
@@ -65,8 +65,8 @@ const Visualizer = () => {
 
 			setTimeout(() => {
 				if (animations[i].comp !== undefined) {
-					allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `var(--app-red)` : `var(--app-green)`
-					allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `var(--app-red)` : `var(--app-green)`
+					allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
+					allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
 				}
 				if (animations[i].swap !== undefined) {
 					let temp = allBars[animations[i].swap[0]].style.height
@@ -93,8 +93,8 @@ const Visualizer = () => {
 
 	// 		setTimeout(() => {
 	// 			if (animations[i].comp !== undefined) {
-	// 				allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `var(--app-red)` : 'aquamarine'
-	// 				allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `var(--app-red)` : 'aquamarine'
+	// 				allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : 'aquamarine'
+	// 				allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : 'aquamarine'
 	// 			}
 	// 			if (animations[i].swap !== undefined) {
 	// 				let temp = allBars[animations[i].swap[0]].style.height
