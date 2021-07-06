@@ -1,0 +1,21 @@
+button {
+	background-color: rgba(var(--app-blue), 1);
+	font-weight: 900;
+	border: none;
+	padding: 0.8em;
+	margin: 0.2em;
+	border-radius: 10px;
+	color: white;
+}
+
+.bg-red {
+	background-color: rgba(var(--app-red), 1);
+}
+
+.bg-red:hover {
+	background-color: rgba(var(--app-red), .7);
+}
+
+button:hover {
+	background-color: rgba(var(--app-blue), .7);
+}
