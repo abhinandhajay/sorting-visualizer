@@ -17,7 +17,7 @@ const Visualizer = () => {
 		const temp = []
 		const allBars = document.querySelectorAll(`.main-bar`)
 		for (let i = 0; i < arraySize; i++) {
-			temp.push(Math.round(Math.random() * 650) + 10)
+			temp.push(Math.round(Math.random() * 600) + 10)
 			if (allBars[i]) {
 				allBars[i].style.backgroundColor = `var(--app-green)`
 			}
