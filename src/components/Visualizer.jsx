@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import bubbleSort from '../algorithms/BubbleSort';
 import insertionSort from '../algorithms/InsertionSort';
+import quickSort from '../algorithms/QuickSort';
 import selectionSort from '../algorithms/SelectionSort';
 import Bar from './Bar';
 import Button from './Button';
@@ -12,6 +13,7 @@ import './Visualizer.css';
 const Visualizer = () => {
 
 	const [array, setArray] = useState([])
+	const [sortedArray, setSortedArray] = useState([])
 	const [arraySize, ] = useState(170)
 
 	const resetArray = () => {
@@ -24,6 +26,7 @@ const Visualizer = () => {
 			}
 		}
 		setArray(temp)
+		setSortedArray(temp.map(x => x).sort((a, b) => a - b))
 		for (let i = 0; i < arraySize; i++) {
 			if (allBars[i]) {
 				allBars[i].style.backgroundColor = `var(--app-green)`
@@ -36,30 +39,32 @@ const Visualizer = () => {
 		const ANIMATION_DELAY_MS = 10
 		const { animations } = selectionSort(array)
 
-		const allBars = document.querySelectorAll(`.main-bar`)
-
-		for (let i = 0; i < animations.length; i++) {
-
-			setTimeout(() => {
-				if (animations[i].comp !== undefined) {
-					allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
-					allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
-				}
-				if (animations[i].swap !== undefined) {
-					let temp = allBars[animations[i].swap[0]].style.height
-					allBars[animations[i].swap[0]].style.height = allBars[animations[i].swap[1]].style.height
-					allBars[animations[i].swap[1]].style.height = temp
-					allBars[animations[i].swap[0]].style.backgroundColor = `var(--app-pink)`
-				}
-			}, ANIMATION_DELAY_MS * i)
-		}
+		playAnimations(animations, ANIMATION_DELAY_MS)
 	}
 
 	const runBubbleSort = () => {
-		const ANIMATION_DELAY_MS = 1
-
+		const ANIMATION_DELAY_MS = 0.5
 		const { animations } = bubbleSort(array)
 
+		playAnimations(animations, ANIMATION_DELAY_MS)
+	}
+
+	const runInsertionSort = () => {
+		const ANIMATION_DELAY_MS = 0.7
+		const { animations } = insertionSort(array)
+
+		playAnimations(animations, ANIMATION_DELAY_MS)
+	}
+
+	const runQuickSort = () => {
+		const ANIMATION_DELAY_MS = 3
+		const animations = []
+		quickSort(array, 0, array.length - 1, animations)
+
+		playAnimations(animations, ANIMATION_DELAY_MS)
+	}
+	
+	const playAnimations = (animations, ANIMATION_DELAY_MS) => {
 		const allBars = document.querySelectorAll(`.main-bar`)
 
 		for (let i = 0; i < animations.length; i++) {
@@ -73,66 +78,16 @@ const Visualizer = () => {
 					let temp = allBars[animations[i].swap[0]].style.height
 					allBars[animations[i].swap[0]].style.height = allBars[animations[i].swap[1]].style.height
 					allBars[animations[i].swap[1]].style.height = temp
-					if (animations[i].sorted === true) {
+					if (`${sortedArray[animations[i].swap[0]]}px` === allBars[animations[i].swap[0]].style.height) {
+						allBars[animations[i].swap[0]].style.backgroundColor = `var(--app-pink)`
+					}
+					if (`${sortedArray[animations[i].swap[1]]}px` === allBars[animations[i].swap[1]].style.height) {
 						allBars[animations[i].swap[1]].style.backgroundColor = `var(--app-pink)`
 					}
 				}
 			}, ANIMATION_DELAY_MS * i)
 		}
-		for (let i = 0; i < arraySize; i++) {
-			setTimeout(() => {
-				allBars[i].style.backgroundColor = `var(--app-pink)`
-			}, ANIMATION_DELAY_MS * animations.length)
-		}
 	}
-
-	const runInsertionSort = () => {
-		const ANIMATION_DELAY_MS = 1
-		const { animations } = insertionSort(array)
-
-		const allBars = document.querySelectorAll(`.main-bar`)
-
-		for (let i = 0; i < animations.length; i++) {
-
-			setTimeout(() => {
-				if (animations[i].comp !== undefined) {
-					allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
-					allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
-				}
-				if (animations[i].swap !== undefined) {
-					let temp = allBars[animations[i].swap[0]].style.height
-					allBars[animations[i].swap[0]].style.height = allBars[animations[i].swap[1]].style.height
-					allBars[animations[i].swap[1]].style.height = temp
-				}
-			}, ANIMATION_DELAY_MS * i)
-		}
-		for (let i = 0; i < arraySize; i++) {
-			setTimeout(() => {
-				allBars[i].style.backgroundColor = `var(--app-pink)`
-			}, ANIMATION_DELAY_MS * animations.length)
-		}
-	}
-
-
-	// const playAnimations = (animations) => {
-	// 	const allBars = document.querySelectorAll(`.main-bar`)
-
-	// 	for (let i = 0; i < animations.length; i++) {
-
-	// 		setTimeout(() => {
-	// 			if (animations[i].comp !== undefined) {
-	// 				allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : 'aquamarine'
-	// 				allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : 'aquamarine'
-	// 			}
-	// 			if (animations[i].swap !== undefined) {
-	// 				let temp = allBars[animations[i].swap[0]].style.height
-	// 				allBars[animations[i].swap[0]].style.height = allBars[animations[i].swap[1]].style.height
-	// 				allBars[animations[i].swap[1]].style.height = temp
-	// 				allBars[animations[i].swap[1]].style.backgroundColor = `var(--app-pink)`
-	// 			}
-	// 		}, ANIMATION_DELAY_MS * i)
-	// 	}
-	// }
 
 	// const testAlgorithms = () => {
 	// 	let temp = []
@@ -186,6 +141,9 @@ const Visualizer = () => {
 			</Button>
 			<Button onClick={runInsertionSort}>
 				Insertion Sort
+			</Button>
+			<Button onClick={runQuickSort}>
+				Quick Sort
 			</Button>
 			{/* <Button onClick={testAlgorithms}>
 				Test Algorithms
