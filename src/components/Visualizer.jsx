@@ -14,13 +14,14 @@ const Visualizer = () => {
 
 	const [array, setArray] = useState([])
 	const [sortedArray, setSortedArray] = useState([])
-	const [arraySize, ] = useState(170)
+	const [arraySize, ] = useState(window.innerWidth / 9)
+	const [arrayHeight, ] = useState(window.innerHeight / 1.4)
 
 	const resetArray = () => {
 		const temp = []
 		const allBars = document.querySelectorAll(`.main-bar`)
 		for (let i = 0; i < arraySize; i++) {
-			temp.push(Math.round(Math.random() * 600) + 10)
+			temp.push(Math.round(Math.random() * arrayHeight) + 10)
 			if (allBars[i]) {
 				allBars[i].style.backgroundColor = `var(--app-green)`
 			}
@@ -36,28 +37,28 @@ const Visualizer = () => {
 	}
 
 	const runSelectionSort = () => {
-		const ANIMATION_DELAY_MS = 10
+		const ANIMATION_DELAY_MS = 1000 / arraySize
 		const { animations } = selectionSort(array)
 
 		playAnimations(animations, ANIMATION_DELAY_MS)
 	}
 
 	const runBubbleSort = () => {
-		const ANIMATION_DELAY_MS = 0.5
+		const ANIMATION_DELAY_MS = 100 / arraySize
 		const { animations } = bubbleSort(array)
 
 		playAnimations(animations, ANIMATION_DELAY_MS)
 	}
 
 	const runInsertionSort = () => {
-		const ANIMATION_DELAY_MS = 0.7
+		const ANIMATION_DELAY_MS = 100 / arraySize
 		const { animations } = insertionSort(array)
 
 		playAnimations(animations, ANIMATION_DELAY_MS)
 	}
 
 	const runQuickSort = () => {
-		const ANIMATION_DELAY_MS = 3
+		const ANIMATION_DELAY_MS = 600 / arraySize
 		const animations = []
 		quickSort(array, 0, array.length - 1, animations)
 
@@ -126,24 +127,23 @@ const Visualizer = () => {
 		resetArray()
 	}, [])
 
-
 	return (
 		<div>
 			<h1>Sorting Visualizer</h1>
 			<Button onClick={resetArray} className={'bg-red'}>
-				Reset Array
+				Reset
 			</Button>
 			<Button onClick={runSelectionSort}>
-				Selection Sort
+				Selection
 			</Button>
 			<Button onClick={runBubbleSort}>
-				Bubble Sort
+				Bubble
 			</Button>
 			<Button onClick={runInsertionSort}>
-				Insertion Sort
+				Insertion
 			</Button>
 			<Button onClick={runQuickSort}>
-				Quick Sort
+				Quick
 			</Button>
 			{/* <Button onClick={testAlgorithms}>
 				Test Algorithms
