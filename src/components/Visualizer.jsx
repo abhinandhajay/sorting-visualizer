@@ -136,24 +136,26 @@ const Visualizer = () => {
 	return (
 		<div>
 			<h1>Sorting Visualizer</h1>
-			<Button onClick={resetArray} className={'bg-red'}>
-				Reset
-			</Button>
-			<Button onClick={runSelectionSort}>
-				Selection
-			</Button>
-			<Button onClick={runBubbleSort}>
-				Bubble
-			</Button>
-			<Button onClick={runInsertionSort}>
-				Insertion
-			</Button>
-			<Button onClick={runQuickSort}>
-				Quick
-			</Button>
-			{/* <Button onClick={testAlgorithms}>
+			<div className="sort-button-container">
+				<Button onClick={runSelectionSort}>
+					Selection
+				</Button>
+				<Button onClick={runBubbleSort}>
+					Bubble
+				</Button>
+				<Button onClick={runInsertionSort}>
+					Insertion
+				</Button>
+				<Button onClick={runQuickSort}>
+					Quick
+				</Button>
+				{/* <Button onClick={testAlgorithms}>
 				Test Algorithms
-			</Button> */}
+				</Button> */}
+			</div>
+			<Button onClick={resetArray} className={'bg-red'}>
+				Reset Array
+			</Button>
 			<div className='bar-container'>
 				{array.map((ele, idx) => (<Bar key={idx} value={ele}></Bar>))}
 			</div>
