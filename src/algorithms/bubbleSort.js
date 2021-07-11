@@ -13,10 +13,9 @@ const bubbleSort = (array) => {
 				// Add animations
 				animations.push({'comp': [j, j+1]})
 				animations.push({'comp': [j, j+1]})
-				animations.push({'swap': [j, j+1], 'sorted': false})
+				animations.push({'swap': [j, j+1]})
 			}
 		}
-		animations[animations.length-1].sorted = true
 	}
 	return { sortedArray, animations }
 }
