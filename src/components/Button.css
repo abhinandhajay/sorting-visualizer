@@ -1,9 +1,10 @@
 button {
 	background-color: rgba(var(--app-blue), 1);
-	font-weight: 900;
+	font-weight: 700;
 	border: none;
-	padding: 0.8em;
-	margin: 4px;
+	padding: 10px;
+	margin: 6px 4px;
+	border-radius: 20px;
 	color: white;
 }
 

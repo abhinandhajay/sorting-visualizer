@@ -2,4 +2,5 @@
 	margin: 0 2px;
 	background-color: var(--app-green);
 	width: 4px;
+	border-radius: 2px;
 }
