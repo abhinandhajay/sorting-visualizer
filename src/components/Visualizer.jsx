@@ -16,6 +16,7 @@ const Visualizer = () => {
 	const [sortedArray, setSortedArray] = useState([])
 	const [arraySize, ] = useState(window.innerWidth / 9)
 	const [arrayHeight, ] = useState(window.innerHeight / 1.4)
+	const timeoutIdList = []
 
 	const resetArray = () => {
 		const temp = []
@@ -33,6 +34,9 @@ const Visualizer = () => {
 				allBars[i].style.backgroundColor = `var(--app-green)`
 				allBars[i].style.height = `${temp[i]}px`
 			}
+		}
+		for (let timeout of timeoutIdList) {
+			clearTimeout(timeout)
 		}
 	}
 
@@ -70,7 +74,7 @@ const Visualizer = () => {
 
 		for (let i = 0; i < animations.length; i++) {
 
-			setTimeout(() => {
+			let timeoutId = setTimeout(() => {
 				if (animations[i].comp !== undefined) {
 					allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
 					allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
@@ -87,6 +91,8 @@ const Visualizer = () => {
 					}
 				}
 			}, ANIMATION_DELAY_MS * i)
+
+			timeoutIdList.push(timeoutId)
 		}
 	}
 
