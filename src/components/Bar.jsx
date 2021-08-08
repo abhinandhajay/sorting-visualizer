@@ -10,7 +10,7 @@ const Bar = (props) => {
 	}, [])
 
 	return (
-		<div className='main-bar' style={{height: `${props.value}px`}}>
+		<div className='main-bar' style={{height: `${props.height}px`, width: `${props.width}px`}}>
 		</div>
 	);
 }

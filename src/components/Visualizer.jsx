@@ -12,10 +12,15 @@ import './Visualizer.css';
 
 const Visualizer = () => {
 
+	// const maxSize = window.innerWidth / 9
+	// const minSize = window.innerWidth / 60
 	const [array, setArray] = useState([])
 	const [sortedArray, setSortedArray] = useState([])
 	const [arraySize, ] = useState(window.innerWidth / 9)
 	const [arrayHeight, ] = useState(window.innerHeight / 1.4)
+	// const [currentSize, setCurrentSize] = useState(3)
+	// const [barWidth,] = useState(currentSize * .025)
+	const [barWidth,] = useState(Math.floor(arraySize / window.innerWidth * 40))
 	const timeoutIdList = []
 
 	const resetArray = () => {
@@ -24,14 +29,14 @@ const Visualizer = () => {
 		for (let i = 0; i < arraySize; i++) {
 			temp.push(Math.round(Math.random() * arrayHeight) + 10)
 			if (allBars[i]) {
-				allBars[i].style.backgroundColor = `var(--app-green)`
+				allBars[i].style.backgroundColor = `var(--app-gray)`
 			}
 		}
 		setArray(temp)
 		setSortedArray(temp.map(x => x).sort((a, b) => a - b))
 		for (let i = 0; i < arraySize; i++) {
 			if (allBars[i]) {
-				allBars[i].style.backgroundColor = `var(--app-green)`
+				allBars[i].style.backgroundColor = `var(--app-gray)`
 				allBars[i].style.height = `${temp[i]}px`
 			}
 		}
@@ -76,18 +81,18 @@ const Visualizer = () => {
 
 			let timeoutId = setTimeout(() => {
 				if (animations[i].comp !== undefined) {
-					allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
-					allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-green)`
+					allBars[animations[i].comp[0]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-gray)`
+					allBars[animations[i].comp[1]].style.backgroundColor = i % 3 === 0 ? `rgb(var(--app-red))` : `var(--app-gray)`
 				}
 				if (animations[i].swap !== undefined) {
 					let temp = allBars[animations[i].swap[0]].style.height
 					allBars[animations[i].swap[0]].style.height = allBars[animations[i].swap[1]].style.height
 					allBars[animations[i].swap[1]].style.height = temp
 					if (`${sortedArray[animations[i].swap[0]]}px` === allBars[animations[i].swap[0]].style.height) {
-						allBars[animations[i].swap[0]].style.backgroundColor = `var(--app-pink)`
+						allBars[animations[i].swap[0]].style.backgroundColor = `var(--app-turquoise)`
 					}
 					if (`${sortedArray[animations[i].swap[1]]}px` === allBars[animations[i].swap[1]].style.height) {
-						allBars[animations[i].swap[1]].style.backgroundColor = `var(--app-pink)`
+						allBars[animations[i].swap[1]].style.backgroundColor = `var(--app-turquoise)`
 					}
 				}
 			}, ANIMATION_DELAY_MS * i)
@@ -157,7 +162,7 @@ const Visualizer = () => {
 				Reset Array
 			</Button>
 			<div className='bar-container'>
-				{array.map((ele, idx) => (<Bar key={idx} value={ele}></Bar>))}
+				{array.map((ele, idx) => (<Bar key={idx} height={ele} width={barWidth}></Bar>))}
 			</div>
 		</div>
 	);

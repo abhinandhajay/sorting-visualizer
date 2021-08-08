@@ -1,12 +1,11 @@
 :root {
-	--app-dark: #2B303A;
+	--app-dark: #2F2F2F;
 	--app-light: #DBCBD8;
 	--app-brown: #322A26;
-	--app-pink: #DB93B0;
-	--app-red: 164, 22, 35;
-	--app-red-darker: #881620;
-	--app-green: #45B69C;
-	--app-blue: 68, 109, 246
+	--app-turquoise: #67b6b3;
+	--app-red: 214, 64, 69;
+	--app-gray: #838E83;
+	--app-blue: 68, 109, 246;
 }
 
 * {
